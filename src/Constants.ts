@@ -1,0 +1,1 @@
+export const TABLE_CELL = 'table_cell';
