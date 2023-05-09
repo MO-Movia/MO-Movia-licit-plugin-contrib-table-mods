@@ -13,7 +13,7 @@ export const TableCellNodeSpec = (nodespec: NodeSpec) =>
           const attrFS = dom.getAttribute('fullSize');
           const attrsVAlign=dom.getAttribute('vAlign');
           let fullSize = 0;
-          let vAlign='top'
+          let vAlign='top';
           if (attrFS) {
             fullSize = parseInt(attrFS);
           }
@@ -53,7 +53,7 @@ export const TableCellNodeSpec = (nodespec: NodeSpec) =>
             base[1].style = style + 'vertical-align: top;';
             break;
         }
-        
+
       }
 
 
