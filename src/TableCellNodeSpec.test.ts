@@ -8,6 +8,10 @@ describe('TableCellNodeSpec', () => {
             attrs: {
                 colspan: { default: 1 },
                 rowspan: { default: 1 },
+                style: {},
+                vAlign: {},
+                fullSize: {}
+
             },
             content: 'inline*',
             tableRole: 'cell',
@@ -18,7 +22,7 @@ describe('TableCellNodeSpec', () => {
                 },
             }],
             toDOM: (node) => {
-                return ['td', { colspan: node.attrs.colspan, rowspan: node.attrs.rowspan }, 0];
+                return ['td', { colspan: node.attrs.colspan, rowspan: node.attrs.rowspan, style: {}, fullSize: 1, vAlign: 'top' }, 0];
             },
 
         }),
@@ -37,13 +41,49 @@ describe('TableCellNodeSpec', () => {
         const dom = document.createElement('td');
         dom.setAttribute('fullSize', '1');
         const attrs = parseDOM[0].getAttrs(dom);
-        //  expect(attrs.fullSize).toBe(2);
+        expect(attrs).toEqual({ fullSize: 1, vAlign: 'top' });
     });
 
+    it('parses vAlign attribute from DOM', () => {
+        const { parseDOM } = tableCellNodeSpec;
+        const dom = document.createElement('td');
+        dom.setAttribute('fullSize', '1');
+        dom.setAttribute('vAlign', 'bottom');
+        const attrs = parseDOM[0].getAttrs(dom);
+        expect(attrs).toEqual({ fullSize: 1, vAlign: 'bottom' });
+    });
     it('serializes fullSize attribute to DOM', () => {
         const { toDOM } = tableCellNodeSpec;
-        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1 });
+        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1, style: {}, vAlign: '' });
         const dom = toDOM(node);
-        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": undefined, "rowspan": 1 }, 0]);
+        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": 1, "rowspan": 1, "style": "[object Object]padding:0;margin:0;", "vAlign": '' }, 0]);
+    });
+
+    it('set vertical align to Top', () => {
+        const { toDOM } = tableCellNodeSpec;
+        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1, style: {}, vAlign: 'top' });
+        const dom = toDOM(node);
+        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": 1, "rowspan": 1, "style": "[object Object]vertical-align: top;", "vAlign": 'top' }, 0]);
+    });
+
+    it('set vertical align to Middle', () => {
+        const { toDOM } = tableCellNodeSpec;
+        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1, style: {}, vAlign: 'middle' });
+        const dom = toDOM(node);
+        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": 1, "rowspan": 1, "style": "[object Object]vertical-align: middle;", "vAlign": 'middle' }, 0]);
+    });
+
+    it('set vertical align to Bottom', () => {
+        const { toDOM } = tableCellNodeSpec;
+        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1, style: {}, vAlign: 'bottom' });
+        const dom = toDOM(node);
+        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": 1, "rowspan": 1, "style": "[object Object]vertical-align: bottom;", "vAlign": 'bottom' }, 0]);
+    });
+
+    it('set vertical align to top in default case', () => {
+        const { toDOM } = tableCellNodeSpec;
+        const node = extendedSchema.nodes.table_cell.create({ fullSize: 1, style: {}, vAlign: 'any' });
+        const dom = toDOM(node);
+        expect(dom).toEqual(["td", { "colspan": 1, "fullSize": 1, "rowspan": 1, "style": "[object Object]vertical-align: top;", "vAlign": 'any' }, 0]);
     });
 });
