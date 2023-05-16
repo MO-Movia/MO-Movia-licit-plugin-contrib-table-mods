@@ -1,29 +1,28 @@
-import {Node, NodeSpec} from 'prosemirror-model';
+import { Node, NodeSpec } from 'prosemirror-model';
 
 export const TableCellNodeSpec = (nodespec: NodeSpec) =>
   Object.assign({}, nodespec, {
     attrs: Object.assign({}, nodespec.attrs, {
-      fullSize: {default: 0},
-      vAlign:{default:'top'}
+      fullSize: { default: 0 },
+      vAlign: { default: 'top' }
     }),
     parseDOM: [
       {
         tag: 'td',
         getAttrs: (dom: HTMLElement) => {
           const attrFS = dom.getAttribute('fullSize');
-          const attrsVAlign=dom.getAttribute('vAlign');
+          const attrsVAlign = dom.getAttribute('vAlign');
           let fullSize = 0;
-          let vAlign='top';
+          let vAlign = 'top'
           if (attrFS) {
             fullSize = parseInt(attrFS);
           }
-          if(attrsVAlign)
-          {
-            vAlign=attrsVAlign;
+          if (attrsVAlign) {
+            vAlign = attrsVAlign;
           }
           return Object.assign({}, nodespec.parseDOM[0].getAttrs(dom), {
             fullSize: fullSize,
-            vAlign:vAlign
+            vAlign: vAlign
           });
         },
       },
@@ -35,22 +34,22 @@ export const TableCellNodeSpec = (nodespec: NodeSpec) =>
         style = base[1].style;
       }
 
-      if (node.attrs.fullSize) {
+      if (node.attrs.fullSize && node.attrs.fullSize === 1) {
         base[1].style = style + 'padding:0;margin:0;';
       }
       if (node.attrs.vAlign) {
         switch (node.attrs.vAlign) {
           case 'top':
-            base[1].style = style + 'vertical-align: top;';
+            base[1].style = base[1].style + 'vertical-align: top;';
             break;
           case 'middle':
-            base[1].style = style + 'vertical-align: middle;';
+            base[1].style = base[1].style + 'vertical-align: middle;';
             break;
           case 'bottom':
-            base[1].style = style + 'vertical-align: bottom;';
+            base[1].style = base[1].style + 'vertical-align: bottom;';
             break;
           default:
-            base[1].style = style + 'vertical-align: top;';
+            base[1].style = base[1].style + 'vertical-align: top;';
             break;
         }
 

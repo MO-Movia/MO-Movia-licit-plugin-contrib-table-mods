@@ -1,6 +1,6 @@
 {
   "name": "@modusoperandi/licit-table-mods",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "subversion": "1",
   "description": "Table extension plugin built with ProseMirror",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "prepare": "npm run build:dist",
-    "test": "jest --coverage --passWithNoTests",
+    "test": "jest --coverage",
     "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
     "ci:bom": "cyclonedx-npm --ignore-npm-errors --short-PURLs --output-format XML --output-file dist/bom.xml",
     "publish:dist": "npm publish"
