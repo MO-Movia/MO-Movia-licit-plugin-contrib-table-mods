@@ -1,9 +1,11 @@
 {
   "name": "@modusoperandi/licit-table-mods",
   "version": "0.0.4",
+  "type": "module",
   "subversion": "1",
   "description": "Table extension plugin built with ProseMirror",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": ""

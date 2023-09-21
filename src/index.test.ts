@@ -24,7 +24,10 @@ describe('TableExtensionPlugin', () => {
                         background: {
                             default: null,
                             getFromDOM(dom) {
-                                return dom.style.backgroundColor || null;
+                                if (dom instanceof HTMLElement) { // Cast 'dom' to HTMLElement
+                                    return dom.style.backgroundColor || null;
+                                }
+                                return null;
                             },
                             setDOMAttr(value, attrs) {
                                 if (value) {
