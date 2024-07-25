@@ -1,4 +1,4 @@
-import {Node, NodeSpec} from 'prosemirror-model';
+import {DOMOutputSpec, Node, NodeSpec} from 'prosemirror-model';
 
 export const TableCellNodeSpec = (nodespec: NodeSpec) => ({
   ...nodespec,
@@ -25,7 +25,7 @@ export const TableCellNodeSpec = (nodespec: NodeSpec) => ({
       },
     },
   ],
-  toDOM(node: Node): Array<unknown> {
+  toDOM(node: Node): DOMOutputSpec{
     const base = nodespec.toDOM(node);
     let style = '';
     if (Array.isArray(base) && 1 < base.length && base[1].style) {
@@ -55,7 +55,7 @@ export const TableCellNodeSpec = (nodespec: NodeSpec) => ({
     base[1].fullSize = node.attrs.fullSize;
     base[1].vAlign = node.attrs.vAlign;
 
-    return base as unknown as Array<unknown>;
+    return base ;
   },
 });
 
