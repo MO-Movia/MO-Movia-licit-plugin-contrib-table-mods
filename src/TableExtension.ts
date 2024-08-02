@@ -1,6 +1,6 @@
 // Plugin to handle Citation.
 import {Plugin, PluginKey} from 'prosemirror-state';
-import {NodeSpec, Schema} from 'prosemirror-model';
+import { Schema} from 'prosemirror-model';
 import {
   TableCellNodeSpec,
 } from './TableCellNodeSpec';
