@@ -9,7 +9,7 @@
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MO-Movia/MO-Movia-licit-plugin-contrib-table-mods"
+    "url": "https://github.com/MO-Movia/MO-Movia-licit-plugin-contrib-table-mods"
   },
   "scripts": {
     "clean": "rm -rf dist/ bin/ && rm -f modusoperandi-licit-table-mods-*.*.*.tgz",
