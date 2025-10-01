@@ -1,1 +1,1 @@
-export const TABLE_CELL = 'table_cell';
+export const TABLE_CELL = 'tableCell';
