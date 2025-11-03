@@ -16,7 +16,7 @@ describe('TableExtensionPlugin', () => {
     it('should add a Table node to the schema', () => {
       const extendedSchema = new Schema({
         nodes: schema.spec.nodes.addToEnd(
-          'table_cell',
+          'tableCell',
           tableNodes({
             tableGroup: 'block',
             cellContent: 'block+',
